@@ -34,4 +34,3 @@ def evaluate_model(chatbot_function, test_path):
     print("✅ Evaluation Summary")
     print(f"Average BERT F1: {avg_f1:.3f}")
     print(f"Average Latency: {latency:.2f} seconds per query")
-Evaluation logic
