@@ -1,14 +1,105 @@
 [
   {
+    "category": "Factual",
     "question": "What is HER-2/neu?",
-    "answer": "HER-2/neu is an oncogene that encodes a receptor tyrosine kinase related to EGFR, often amplified in aggressive breast cancers."
+    "answer": "HER-2/neu is an oncogene that encodes a receptor tyrosine kinase. It is a member of the erbB-like oncogene family and is associated with aggressive forms of breast cancer."
   },
   {
-    "question": "How does HER-2/neu amplification impact survival?",
-    "answer": "Amplification is associated with shorter disease-free and overall survival in node-positive breast cancer patients."
+    "category": "Factual",
+    "question": "What kind of gene is HER-2/neu and what does it encode?",
+    "answer": "HER-2/neu encodes a 185,000 dalton transmembrane protein with tyrosine kinase activity. It is closely related to EGFR and functions as a growth factor receptor."
   },
   {
-    "question": "Is HER-2/neu amplification correlated with hormone receptor status?",
-    "answer": "No significant correlation was found between HER-2/neu amplification and estrogen or progesterone receptor status."
-  }
-]
+    "category": "Factual",
+    "question": "What percentage of breast tumors showed HER-2/neu amplification?",
+    "answer": "HER-2/neu amplification was observed in 30% of breast tumors across two patient cohorts (189 tumors total)."
+  },
+  {
+    "category": "Factual",
+    "question": "What methods were used to detect gene amplification?",
+    "answer": "Southern blot analysis with 32P-labeled HER-2 probes was used to detect amplification, validated by dilution analysis and densitometry scanning."
+  },
+  {
+    "category": "Factual",
+    "question": "What patient cohort was used in the study?",
+    "answer": "The study involved 189 breast cancer patients from the University of Texas, San Antonio. Clinical data included tumor size, lymph node status, hormone receptor status, and follow-up."
+  },
+  {
+    "category": "Correlation",
+    "question": "How does HER-2/neu amplification correlate with survival?",
+    "answer": "Amplification is significantly associated with decreased overall survival and earlier relapse in node-positive breast cancer patients."
+  },
+  {
+    "category": "Correlation",
+    "question": "Is HER-2/neu amplification associated with relapse risk?",
+    "answer": "Yes, HER-2/neu amplification strongly correlates with shorter time to relapse among node-positive patients."
+  },
+  {
+    "category": "Correlation",
+    "question": "How does amplification relate to axillary lymph node involvement?",
+    "answer": "Amplification was more frequent in patients with >3 positive lymph nodes and was identified as an independent prognostic factor."
+  },
+  {
+    "category": "Correlation",
+    "question": "What is the relationship between HER-2/neu and estrogen receptor status?",
+    "answer": "There was no significant correlation found between HER-2/neu amplification and estrogen receptor status in the study."
+  },
+  {
+    "category": "Correlation",
+    "question": "Does HER-2/neu impact prognosis independently of other variables?",
+    "answer": "Yes, HER-2/neu amplification retained prognostic significance even after adjusting for hormone receptors, tumor size, and nodal status."
+  },
+  {
+    "category": "Comparative",
+    "question": "How does HER-2/neu compare with ER/PR as a prognostic marker?",
+    "answer": "HER-2/neu amplification has greater prognostic value than estrogen and progesterone receptors and is equivalent to the number of positive lymph nodes in predicting relapse and survival."
+  },
+  {
+    "category": "Comparative",
+    "question": "How does HER-2/neu status affect prognosis for node-positive patients?",
+    "answer": "In node-positive patients, HER-2/neu amplification was a strong independent predictor of shorter disease-free and overall survival, even after multivariate adjustments."
+  },
+  {
+    "category": "Comparative",
+    "question": "What is the clinical significance of a >5-fold amplification of HER-2/neu?",
+    "answer": "Patients with greater than 5 copies of HER-2/neu had significantly shorter disease-free and overall survival compared to those without amplification."
+  },
+  {
+    "category": "Comparative",
+    "question": "How did survival curves differ for patients with and without HER-2/neu amplification?",
+    "answer": "Survival curves showed that patients with HER-2/neu amplification, especially >5 copies, had markedly worse outcomes than those without amplification."
+  },
+  {
+    "category": "Edge Case",
+    "question": "Does HER-2/neu amplification influence treatment options?",
+    "answer": "While not directly studied in this paper, the authors suggest HER-2/neu may influence treatment strategy design and justify development of targeted therapies."
+  },
+  {
+    "category": "Edge Case",
+    "question": "What conclusions were drawn for patients with low vs. high levels of amplification?",
+    "answer": "Higher levels of amplification (>5 copies) were associated with worse survival outcomes than low-level or no amplification."
+  },
+  {
+    "category": "Edge Case",
+    "question": "What statistical methods were used to establish prognostic significance?",
+    "answer": "Kaplan-Meier survival curves and Cox proportional hazards regression models were used for univariate and multivariate analyses."
+  },
+  {
+    "category": "Edge Case",
+    "question": "Are HER-2/neu findings consistent across subgroups?",
+    "answer": "Amplification patterns and correlations were consistent across the node-positive subgroup and reflected in both cohorts examined."
+  },
+  {
+    "category": "Edge Case",
+    "question": "What are limitations in interpreting HER-2/neu as a biomarker?",
+    "answer": "Limitations include variability in gene expression, the need for long-term follow-up, and absence of data on metastatic lesions."
+  },
+  {
+    "category": "Adversarial",
+    "question": "Is HER-2/neu amplification always a sign of poor prognosis?",
+    "answer": "While often associated with poor prognosis, especially with >5 copies, not all amplified cases show uniformly poor outcomes."
+  },
+  {
+    "category": "Adversarial",
+    "question": "Can HER-2/neu amplification occur without affecting survival?",
+    "answer": "Yes, amplification was found even in some patients with longer survival, suggesting other interactin
