@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "question": "What is HER-2/neu?",
+    "answer": "HER-2/neu is an oncogene that encodes a receptor tyrosine kinase related to EGFR, often amplified in aggressive breast cancers."
+  },
+  {
+    "question": "How does HER-2/neu amplification impact survival?",
+    "answer": "Amplification is associated with shorter disease-free and overall survival in node-positive breast cancer patients."
+  },
+  {
+    "question": "Is HER-2/neu amplification correlated with hormone receptor status?",
+    "answer": "No significant correlation was found between HER-2/neu amplification and estrogen or progesterone receptor status."
+  }
+]
