@@ -1,6 +1,7 @@
-transformers
-langchain
+langchain>=0.1.17
+unstructured[pdf]>=0.10.6
 sentence-transformers
+transformers
 faiss-cpu
-PyPDF2
+PyMuPDF
 bert-score
