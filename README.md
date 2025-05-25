@@ -24,5 +24,11 @@ A document-grounded chatbot that answers questions about HER-2/neu oncogene ampl
 
 ---
 
+## 💬 How to Run
 
+### 📍 Local
+
+```bash
+pip install -r requirements.txt
+streamlit run run_chatbot.py
 
