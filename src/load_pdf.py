@@ -1,7 +1,8 @@
-# PDF loader
-from PyPDF2 import PdfReader
+# Unstructured PDF loader
+from langchain.document_loaders import UnstructuredFileLoader
 
 def extract_text_from_pdf(pdf_path):
-    reader = PdfReader(pdf_path)
-    text = "\n".join([page.extract_text() for page in reader.pages if page.extract_text()])
+    loader = UnstructuredFileLoader(pdf_path)
+    documents = loader.load()
+    text = "\n".join([doc.page_content for doc in documents])
     return text
