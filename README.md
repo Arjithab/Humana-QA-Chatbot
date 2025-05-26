@@ -29,6 +29,13 @@ A document-grounded chatbot that answers questions about HER-2/neu oncogene ampl
 ### 📍 Local
 
 ```bash
+git clone https://github.com/Arjithab/Humana-QA-chatbot.git
+cd Humana-QA-chatbot
+
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt
+
 streamlit run run_chatbot.py
 
