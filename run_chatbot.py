@@ -34,10 +34,14 @@ st.markdown("Ask questions based on the HER-2/neu research paper. The chatbot wi
 # Chat input
 question = st.text_input("🔎 Ask a question:")
 
+# Temp placeholder
+st.write("🔎 Question received:", question)
+st.write("Loading model and retriever...")
+
 if question:
     start_time = time.time()
-    response = qa_chain.run(question)
-    latency = round(time.time() - start_time, 2)
+    response = qa_chain.invoke({"query": question})
+    latency = round(time.time() - start_time, 2)  
 
     st.markdown("### 🤖 Answer")
     st.write(response)
