@@ -11,3 +11,6 @@ tqdm
 scikit-learn
 sacremoses
 unstructured[pdf]
+langchain-core
+torch>=1.13
+
