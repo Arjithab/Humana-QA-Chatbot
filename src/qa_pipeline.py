@@ -1,7 +1,7 @@
 # RAG QA pipeline
 from langchain.chains import RetrievalQA
-from langchain.llms import HuggingFacePipeline
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from langchain_community.llms import HuggingFacePipeline
 
 def setup_qa_chain(vectorstore, model_name="microsoft/BioGPT-Large"):
     # Load tokenizer and model
