@@ -7,6 +7,9 @@ from src.load_pdf import extract_text_from_pdf
 from src.chunking import chunk_text
 from src.embed_store import build_vector_store
 from src.qa_pipeline import setup_qa_chain
+import os
+
+os.environ["TORCH_DISABLE_TELEMETRY"] = "1"
 
 # First Streamlit call
 st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
