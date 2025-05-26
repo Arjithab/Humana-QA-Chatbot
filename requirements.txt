@@ -9,3 +9,5 @@ rouge-score
 pypdf
 tqdm
 scikit-learn
+sacremoses
+unstructured[pdf]
