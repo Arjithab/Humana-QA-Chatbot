@@ -8,6 +8,9 @@ from src.chunking import chunk_text
 from src.embed_store import build_vector_store
 from src.qa_pipeline import setup_qa_chain
 
+# First Streamlit call
+st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
+
 # Session + version tracking
 MODEL_VERSION = "BioGPT-v1.1"
 SESSION_ID = str(uuid.uuid4())
@@ -22,7 +25,6 @@ def load_chain():
 qa_chain = load_chain()
 
 # Streamlit layout
-st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
 st.title("🧬 HER-2/neu Biomedical Chatbot")
 st.markdown("Ask questions based on the HER-2/neu research paper. The chatbot will retrieve relevant sections and generate an answer.")
 
