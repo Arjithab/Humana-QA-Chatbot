@@ -1,6 +1,7 @@
 streamlit
 langchain
 langchain-community
+langchain-unstructured
 sentence-transformers
 faiss-cpu
 transformers
