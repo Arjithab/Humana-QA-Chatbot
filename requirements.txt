@@ -2,7 +2,6 @@ streamlit
 langchain>=0.2.0
 langchain-core
 langchain-community
-langchain-unstructured
 langchain-huggingface
 sentence-transformers
 faiss-cpu
