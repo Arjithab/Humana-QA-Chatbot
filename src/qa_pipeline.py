@@ -36,7 +36,7 @@ def setup_qa_chain(vectorstore, model_name="microsoft/BioGPT-Large"):
     llm = HuggingFacePipeline(pipeline=pipe)
 
     # Setup retrieval-augmented QA
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 5}
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
     qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, return_source_documents=True)
 
     return qa_chain
