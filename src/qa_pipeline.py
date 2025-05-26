@@ -4,7 +4,7 @@
 import torch
 from langchain.chains import RetrievalQA
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-from langchain_community.llms import HuggingFacePipeline
+from langchain_huggingface import HuggingFacePipeline
 
 def setup_qa_chain(vectorstore, model_name="microsoft/BioGPT-Large"):
     # Load tokenizer and model
