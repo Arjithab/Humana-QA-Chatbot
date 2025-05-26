@@ -1,7 +1,10 @@
-langchain>=0.1.17
-unstructured[pdf]>=0.10.6
-PyMuPDF>=1.22.3
-transformers>=4.37.0
-sentence-transformers>=2.2.2
-faiss-cpu>=1.7.4
-bert-score>=0.3.13
+streamlit
+langchain
+sentence-transformers
+faiss-cpu
+transformers
+bert-score
+rouge-score
+pypdf
+tqdm
+scikit-learn
