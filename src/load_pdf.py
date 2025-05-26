@@ -1,5 +1,5 @@
 # Unstructured PDF loader
-from langchain.document_loaders import UnstructuredFileLoader
+from langchain_community.document_loaders import UnstructuredFileLoader
 
 def extract_text_from_pdf(pdf_path):
     loader = UnstructuredFileLoader(pdf_path)
