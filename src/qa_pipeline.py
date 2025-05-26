@@ -11,8 +11,14 @@ def setup_qa_chain(vectorstore, model_name="microsoft/BioGPT-Large"):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
 
-    device = 0 if torch.backends.mps.is_available() else -1
-    
+    # Use MPS (Apple Silicon) if available, else CPU
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+    elif torch.cuda.is_available():
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
+        
     # Define pipeline
     pipe = pipeline(
         "text-generation",
