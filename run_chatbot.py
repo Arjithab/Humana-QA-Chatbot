@@ -8,7 +8,9 @@ from src.chunking import chunk_text
 from src.embed_store import build_vector_store
 from src.qa_pipeline import setup_qa_chain
 import os
+import warnings
 
+warnings.filterwarnings("ignore", category=UserWarning, module="transformers.pytorch_utils")
 os.environ["TORCH_DISABLE_TELEMETRY"] = "1"
 
 # First Streamlit call
