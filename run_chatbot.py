@@ -83,8 +83,8 @@ if question:
             }
         }
         
-    with open("chatbot_logs.jsonl", "a") as f:
+        with open("chatbot_logs.jsonl", "a") as f:
             f.write(json.dumps(feedback) + "\n")
         
-    st.success("Feedback saved. Thank you!")
+        st.success("Feedback saved. Thank you!")
 
