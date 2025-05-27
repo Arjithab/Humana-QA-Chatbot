@@ -33,7 +33,7 @@ def setup_qa_chain(vectorstore, model_name="google/flan-t5-base"):
         do_sample=True,
         temperature=0.7,
         top_p=0.95,
-        return_full_text=False
+        #return_full_text=False
     )
 
     # Wrap in LangChain LLM
