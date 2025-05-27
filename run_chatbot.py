@@ -53,7 +53,7 @@ if question:
 
     try:
         response = qa_chain.invoke({"query": question})
-        
+        duration = round(time.time() - start_time, 2)
         if isinstance(response, dict):
             answer = response.get("result", "")
             sources = response.get("source_documents", [])
@@ -100,5 +100,8 @@ if question:
 
     
     except Exception as e:
+        duration = -1  # 🔧 fallback in case of failure
+        answer = "No response due to error."
+        source_texts = []        
         st.error(f"⚠️ Error generating response: {e}")      
 
