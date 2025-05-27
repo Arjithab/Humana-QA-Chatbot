@@ -9,7 +9,7 @@ from langchain_huggingface import HuggingFacePipeline
 def setup_qa_chain(vectorstore, model_name="google/flan-t5-base"):
     # Load tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
     # ✅ Detect device (MPS if Mac, otherwise CPU)
     if torch.backends.mps.is_available():
