@@ -24,18 +24,13 @@ st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
 MODEL_VERSION = "TinyGPT-Test"
 SESSION_ID = str(uuid.uuid4())
 
-# Initialize memory
+# Init state
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
-    
-# Streamlit layout
-st.title("🧬 HER-2/neu Biomedical Chatbot")
-st.markdown("Ask questions based on the HER-2/neu research paper. The chatbot will retrieve relevant sections and generate an answer.")
+if "question" not in st.session_state:
+    st.session_state["question"] = ""
 
-# Debug step 1: load vectorstore and chain
-st.info("🔄 Initializing chatbot backend...")
-start_load = time.time()
-
+# Load model + vectorstore
 @st.cache_resource
 def load_chain():
     text = extract_text_from_pdf("data/her2_paper.pdf")
@@ -43,85 +38,77 @@ def load_chain():
     vectorstore = build_vector_store(chunks)
     return setup_qa_chain(vectorstore)
 
-st.info("Initializing model and embeddings...")
 qa_chain = load_chain()
-st.success(f"Chatbot ready in {round(time.time() - start_load, 2)} seconds")
 
 # Show chat history
 for entry in st.session_state["messages"]:
     st.markdown(f"**👤 You:** {entry['question']}")
     st.markdown(f"**🤖 Chatbot:** {entry['answer']}")
     st.divider()
-    
-# Chat input
-question = st.text_input("Ask a question:", key="question")
 
+# Input box (persistent key, empty after submit)
+question = st.text_input("🔎 Ask a question about the paper:", value="", key="question_input")
+
+# When user submits a question
 if question:
-    st.write("Question received:", question)
-    with st.spinner("Thinking..."):
-            
+    with st.spinner("🤖 Thinking..."):
         try:
             start_time = time.time()
             response = qa_chain.invoke({"query": question})
             duration = round(time.time() - start_time, 2)
-    
-            # Extract clean answer + source
+
             if isinstance(response, dict):
                 answer = response.get("result", "")
                 sources = response.get("source_documents", [])
-                # Extract only the source text, not full Document objects
-                source_texts = [ doc.page_content for doc in sources if hasattr(doc, "page_content")]
+                source_texts = [doc.page_content for doc in sources if hasattr(doc, "page_content")]
             else:
                 answer = str(response)
-                source_texts = []      
-                
-            latency = round(time.time() - start_time, 2)  
-        
-            # Show response immediately
+                source_texts = []
+
+            # Add to conversation memory
+            st.session_state["messages"].append({
+                "question": question,
+                "answer": answer,
+                "sources": source_texts,
+                "latency": duration
+            })
+
+            # Re-render this entry immediately
             st.markdown(f"**👤 You:** {question}")
             st.markdown(f"**🤖 Chatbot:** {answer}")
             st.caption(f"⏱️ Responded in {duration} seconds")
             st.divider()
-    
-            # Save chat to history
-            st.session_state["messages"].append({
-                "question": question,
-                "answer": answer
-            })    
-            
-            # Feedback
-            st.markdown("### 🙋 Was this answer helpful?")
-            col1, col2 = st.columns(2)
-            thumbs_up = col1.button("👍 Yes")
-            thumbs_down = col2.button("👎 No")
-            comment = st.text_area("💬 Additional feedback", "")
-        
-            # 🔧 ✅ Only write feedback if button clicked
-            if thumbs_up or thumbs_down:
-                feedback = {
-                            "timestamp": datetime.utcnow().isoformat(),
-                            "session_id": SESSION_ID,
-                            "question": question,
-                            "response": answer,       # JSON-safe string
-                            "sources": source_texts,  # SON-safe list of strings
-                            "latency": duration,
-                            "model_version": MODEL_VERSION,
-                            "feedback": {
-                                "thumbs_up": thumbs_up,
-                                "thumbs_down": thumbs_down,
-                                "comment": comment
-                            }
-                        }
-        
-                with open("chatbot_logs.jsonl", "a") as f:
-                    f.write(json.dumps(feedback) + "\n")
-        
-                st.success("Feedback saved!")
-    
-        
+
         except Exception as e:
-            duration = -1  # 🔧 fallback in case of failure
-            answer = "No response due to error."
-            source_texts = []        
-            st.error(f"⚠️ Error generating response: {e}")      
-    
+            st.error(f"⚠️ Error: {e}")
+
+    # ✅ Clear input box after response (simulating ChatGPT behavior)
+    st.session_state["question_input"] = ""
+
+# Optional Feedback (at bottom, always available)
+with st.expander("🙋 Give feedback on the last answer"):
+    if st.session_state["messages"]:
+        last = st.session_state["messages"][-1]
+        col1, col2 = st.columns(2)
+        thumbs_up = col1.button("👍 Helpful", key="up")
+        thumbs_down = col2.button("👎 Not helpful", key="down")
+        comment = st.text_area("💬 Additional feedback", "", key="feedback_comment")
+
+        if thumbs_up or thumbs_down:
+            feedback = {
+                "timestamp": datetime.utcnow().isoformat(),
+                "session_id": SESSION_ID,
+                "question": last["question"],
+                "response": last["answer"],
+                "sources": last["sources"],
+                "latency": last["latency"],
+                "model_version": MODEL_VERSION,
+                "feedback": {
+                    "thumbs_up": thumbs_up,
+                    "thumbs_down": thumbs_down,
+                    "comment": comment
+                }
+            }
+            with open("chatbot_logs.jsonl", "a") as f:
+                f.write(json.dumps(feedback) + "\n")
+            st.success("✅ Feedback saved!")
