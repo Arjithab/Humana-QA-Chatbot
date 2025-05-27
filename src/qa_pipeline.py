@@ -3,7 +3,7 @@
 #For local testing
 import torch
 from langchain.chains import RetrievalQA
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline # AutoModelForCausalLM
 from langchain_huggingface import HuggingFacePipeline
 
 def setup_qa_chain(vectorstore, model_name="google/flan-t5-base"):
@@ -11,20 +11,24 @@ def setup_qa_chain(vectorstore, model_name="google/flan-t5-base"):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
 
-    # Use MPS (Apple Silicon) if available, else CPU
+    # ✅ Detect device (MPS if Mac, otherwise CPU)
     if torch.backends.mps.is_available():
         device = torch.device("mps")
+        device_index = 0
     elif torch.cuda.is_available():
         device = torch.device("cuda")
+        device_index = 0
     else:
         device = torch.device("cpu")
-        
+        device_index = -1
+
+    
     # Define pipeline
     pipe = pipeline(
         "text-generation",
         model=model,
         tokenizer=tokenizer,
-        device=device,
+        device=-1,
         max_new_tokens=256,
         do_sample=True,
         temperature=0.7,
