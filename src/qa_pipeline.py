@@ -3,10 +3,10 @@
 #For local testing
 import torch
 from langchain.chains import RetrievalQA
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, AutoModelForSeq2SeqLM
 from langchain_huggingface import HuggingFacePipeline
 
-def setup_qa_chain(vectorstore, model_name="sshleifer/tiny-gpt2"):
+def setup_qa_chain(vectorstore, model_name="google/flan-t5-base"):
     # Load tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
