@@ -3,7 +3,7 @@
 #For local testing
 import torch
 from langchain.chains import RetrievalQA
-from transformers import AutoTokenizer,utoModelForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from langchain_huggingface import HuggingFacePipeline
 
 def setup_qa_chain(vectorstore, model_name="BioGPT-v1.1"):
