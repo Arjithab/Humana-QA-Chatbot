@@ -98,6 +98,7 @@ if question:
     
             st.success("Feedback saved!")
 
-        except Exception as e:
-            st.error(f"⚠️ Error generating response: {e}")
+    
+    except Exception as e:
+        st.error(f"⚠️ Error generating response: {e}")      
 
