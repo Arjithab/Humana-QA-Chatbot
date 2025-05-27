@@ -25,7 +25,7 @@ def setup_qa_chain(vectorstore, model_name="google/flan-t5-base"):
     
     # Define pipeline
     pipe = pipeline(
-        "text-generation",
+        "text2text-generation",
         model=model,
         tokenizer=tokenizer,
         device=-1,
