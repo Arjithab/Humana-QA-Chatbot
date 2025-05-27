@@ -38,11 +38,13 @@ def setup_qa_chain(vectorstore, model_name="microsoft/BioGPT-Large"):
 
     # Setup retrieval-augmented QA
     retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
-    qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, return_source_documents=True, chain_type="stuff",
-        chain_type_kwargs={
+    qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, return_source_documents=True,
+        chain_type="stuff", chain_type_kwargs={
             "prompt": {
                 "template": "Context:\n{context}\n\nQuestion: {question}\nAnswer:",
                 "input_variables": ["context", "question"]
-            })
-
+            }
+        }
+    )    
+    
     return qa_chain
