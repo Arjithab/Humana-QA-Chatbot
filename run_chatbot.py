@@ -15,8 +15,8 @@ os.environ["TORCH_DISABLE_TELEMETRY"] = "1"
 
 # First Streamlit call
 st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
+st.title("🧬 HER-2/neu Biomedical Q&A Chatbot")# Session + version tracking
 
-# Session + version tracking
 #MODEL_VERSION = "BioGPT-v1.1"
 #SESSION_ID = str(uuid.uuid4())
 
@@ -46,11 +46,12 @@ for entry in st.session_state["messages"]:
     st.markdown(f"**🤖 Chatbot:** {entry['answer']}")
     st.divider()
 
-# Input box (persistent key, empty after submit)
-question = st.text_input("🔎 Ask a question about the paper:", value="", key="question_input")
-
-# When user submits a question
-if question:
+# Callback function
+def process_question():
+    question = st.session_state["question_input"].strip()
+    if not question:
+        return
+        
     with st.spinner("🤖 Thinking..."):
         try:
             start_time = time.time()
@@ -82,8 +83,15 @@ if question:
         except Exception as e:
             st.error(f"⚠️ Error: {e}")
 
-    # ✅ Clear input box after response (simulating ChatGPT behavior)
+    # Reset input field
     st.session_state["question_input"] = ""
+
+# Input box (now powered by callback)
+st.text_input(
+    "🔎 Ask a question about the paper:",
+    key="question_input",
+    on_change=process_question
+)
 
 # Optional Feedback (at bottom, always available)
 with st.expander("🙋 Give feedback on the last answer"):
