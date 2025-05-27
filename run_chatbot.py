@@ -17,8 +17,20 @@ os.environ["TORCH_DISABLE_TELEMETRY"] = "1"
 st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
 
 # Session + version tracking
-MODEL_VERSION = "BioGPT-v1.1"
+#MODEL_VERSION = "BioGPT-v1.1"
+#SESSION_ID = str(uuid.uuid4())
+
+##Session tracking
+MODEL_VERSION = "TinyGPT-Test"
 SESSION_ID = str(uuid.uuid4())
+
+# Streamlit layout
+st.title("🧬 HER-2/neu Biomedical Chatbot")
+st.markdown("Ask questions based on the HER-2/neu research paper. The chatbot will retrieve relevant sections and generate an answer.")
+
+# Debug step 1: load vectorstore and chain
+st.info("🔄 Initializing chatbot backend...")
+start_load = time.time()
 
 @st.cache_resource
 def load_chain():
@@ -29,14 +41,13 @@ def load_chain():
 
 qa_chain = load_chain()
 
-# Streamlit layout
-st.title("🧬 HER-2/neu Biomedical Chatbot")
-st.markdown("Ask questions based on the HER-2/neu research paper. The chatbot will retrieve relevant sections and generate an answer.")
+st.success(f"✅ Chatbot ready in {round(time.time() - start_load, 2)} seconds")
 
 # Chat input
 question = st.text_input("🔎 Ask a question:")
 
 if question:
+    st.write("📩 Question received:", question)
     start_time = time.time()
     response = qa_chain.invoke({"query": question})
     latency = round(time.time() - start_time, 2)  
