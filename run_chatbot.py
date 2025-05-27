@@ -41,7 +41,7 @@ def load_chain():
 
 qa_chain = load_chain()
 
-st.success(f"✅ Chatbot ready in {round(time.time() - start_load, 2)} seconds")
+st.success(f"Chatbot ready in {round(time.time() - start_load, 2)} seconds")
 
 # Chat input
 question = st.text_input("🔎 Ask a question:")
@@ -50,7 +50,11 @@ if question:
     st.write("📩 Question received:", question)
     start_time = time.time()
     response = qa_chain.invoke({"query": question})
-    answer = response["result"] if isinstance(response, dict) and "result" in response else str(response)  
+    # Extract just the final answer string
+    if isinstance(response, dict) and "result" in response:
+        answer = response["result"]
+    else:
+        answer = str(response)      
     latency = round(time.time() - start_time, 2)  
 
     st.markdown("### 🤖 Answer")
@@ -78,7 +82,9 @@ if question:
                 "comment": comment
             }
         }
-        with open("chatbot_logs.jsonl", "a") as f:
+        
+    with open("chatbot_logs.jsonl", "a") as f:
             f.write(json.dumps(feedback) + "\n")
-        st.success("✅ Feedback saved. Thank you!")
+        
+    st.success("Feedback saved. Thank you!")
 
