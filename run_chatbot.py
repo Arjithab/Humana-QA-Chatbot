@@ -50,6 +50,7 @@ if question:
     st.write("📩 Question received:", question)
     start_time = time.time()
     response = qa_chain.invoke({"query": question})
+    answer = response["result"] if isinstance(response, dict) and "result" in response else str(response)  
     latency = round(time.time() - start_time, 2)  
 
     st.markdown("### 🤖 Answer")
