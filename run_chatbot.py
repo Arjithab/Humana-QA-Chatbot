@@ -48,11 +48,12 @@ question = st.text_input("🔎 Ask a question:")
 
 if question:
     st.write("📩 Question received:", question)
-    start_time = time.time()
     with st.spinner("🤖 Generating answer..."):
-        start_time = time.time()    response = qa_chain.invoke({"query": question})
+        start_time = time.time()    
 
     try:
+        response = qa_chain.invoke({"query": question})
+        
         if isinstance(response, dict):
             answer = response.get("result", "")
             sources = response.get("source_documents", [])
