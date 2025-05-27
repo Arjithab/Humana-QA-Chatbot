@@ -17,11 +17,8 @@ os.environ["TORCH_DISABLE_TELEMETRY"] = "1"
 st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
 st.title("🧬 HER-2/neu Biomedical Q&A Chatbot")# Session + version tracking
 
-#MODEL_VERSION = "BioGPT-v1.1"
-#SESSION_ID = str(uuid.uuid4())
-
-##Session tracking
-MODEL_VERSION = "TinyGPT-Test"
+#Session tracking
+MODEL_VERSION = "BioGPT-v1.1"
 SESSION_ID = str(uuid.uuid4())
 
 # Init state
