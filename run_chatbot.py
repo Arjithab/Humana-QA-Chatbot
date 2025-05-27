@@ -24,6 +24,10 @@ st.set_page_config(page_title="HER-2/neu Q&A Chatbot", page_icon="🧬")
 MODEL_VERSION = "TinyGPT-Test"
 SESSION_ID = str(uuid.uuid4())
 
+# Initialize memory
+if "messages" not in st.session_state:
+    st.session_state["messages"] = []
+    
 # Streamlit layout
 st.title("🧬 HER-2/neu Biomedical Chatbot")
 st.markdown("Ask questions based on the HER-2/neu research paper. The chatbot will retrieve relevant sections and generate an answer.")
@@ -39,21 +43,29 @@ def load_chain():
     vectorstore = build_vector_store(chunks)
     return setup_qa_chain(vectorstore)
 
+st.info("Initializing model and embeddings...")
 qa_chain = load_chain()
-
 st.success(f"Chatbot ready in {round(time.time() - start_load, 2)} seconds")
 
+# Show chat history
+for entry in st.session_state["messages"]:
+    st.markdown(f"**👤 You:** {entry['question']}")
+    st.markdown(f"**🤖 Chatbot:** {entry['answer']}")
+    st.divider()
+    
 # Chat input
-question = st.text_input("🔎 Ask a question:")
+question = st.text_input("Ask a question:", key="question")
 
 if question:
     st.write("📩 Question received:", question)
     with st.spinner("🤖 Generating answer..."):
-        start_time = time.time()    
-
+            
     try:
+        start_time = time.time()
         response = qa_chain.invoke({"query": question})
         duration = round(time.time() - start_time, 2)
+
+        # Extract clean answer + source
         if isinstance(response, dict):
             answer = response.get("result", "")
             sources = response.get("source_documents", [])
@@ -65,10 +77,18 @@ if question:
             
         latency = round(time.time() - start_time, 2)  
     
-        st.markdown("### 🤖 Answer")
-        st.write(response)
-        st.caption(f"⏱️ Responded in {latency:.2f} seconds")
-    
+        # Show response immediately
+        st.markdown(f"**👤 You:** {question}")
+        st.markdown(f"**🤖 Chatbot:** {answer}")
+        st.caption(f"⏱️ Responded in {duration} seconds")
+        st.divider()
+
+        # Save chat to history
+        st.session_state["messages"].append({
+            "question": question,
+            "answer": answer
+        })    
+        
         # Feedback
         st.markdown("### 🙋 Was this answer helpful?")
         col1, col2 = st.columns(2)
