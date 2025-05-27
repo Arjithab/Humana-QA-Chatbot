@@ -6,7 +6,7 @@ from langchain.chains import RetrievalQA
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from langchain_huggingface import HuggingFacePipeline
 
-def setup_qa_chain(vectorstore, model_name="microsoft/BioGPT-Large"):
+def setup_qa_chain(vectorstore, model_name="sshleifer/tiny-gpt2"):
     # Load tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
