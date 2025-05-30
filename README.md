@@ -1,6 +1,6 @@
 # 🧬 HER-2/neu Q&A Chatbot
 
-A document-grounded chatbot that answers questions about HER-2/neu oncogene amplification and prognosis in breast cancer, using a research paper and an open-source LLM (BioGPT). The chatbot supports continuous improvement via feedback logging, automated evaluation, and human-in-the-loop correction.
+A document-grounded chatbot that answers questions about HER-2/neu oncogene amplification and prognosis in breast cancer, using a research paper [and](https://www.researchgate.net/profile/Gary-Clark/publication/19364043_Slamon_DJ_Clark_GM_Wong_SG_Levin_WJ_Ullrich_A_McGuire_WLHuman_breast_cancer_correlation_of_relapse_and_survival_with_amplification_of_the_HER-2neu_oncogene_Science_Wash_DC_235_177-182/links/0046352b85f241a532000000/Slamon-DJ-Clark-GM-Wong-SG-Levin-WJ-Ullrich-A-McGuire-WLHuman-breast-cancer-correlation-of-relapse-and-survival-with-amplification-of-the-HER-2-neu-oncogene-Science-Wash-DC-235-177-182.pdf) an open-source LLM (BioGPT). The chatbot supports continuous improvement via feedback logging, automated evaluation, and human-in-the-loop correction.
 
 ---
 
